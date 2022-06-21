@@ -14,6 +14,7 @@
 		AC97F2ED2861DD35000A621C /* SampleLoginValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2EC2861DD35000A621C /* SampleLoginValidationTests.swift */; };
 		AC97F2F72861DD35000A621C /* SampleLoginValidationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2F62861DD35000A621C /* SampleLoginValidationUITests.swift */; };
 		AC97F2F92861DD35000A621C /* SampleLoginValidationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2F82861DD35000A621C /* SampleLoginValidationUITestsLaunchTests.swift */; };
+		AC97F3082861DD6E000A621C /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F3072861DD6E000A621C /* LoginScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		AC97F2F22861DD35000A621C /* SampleLoginValidationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleLoginValidationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC97F2F62861DD35000A621C /* SampleLoginValidationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleLoginValidationUITests.swift; sourceTree = "<group>"; };
 		AC97F2F82861DD35000A621C /* SampleLoginValidationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleLoginValidationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AC97F3072861DD6E000A621C /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		AC97F2DA2861DD33000A621C /* SampleLoginValidation */ = {
 			isa = PBXGroup;
 			children = (
+				AC97F3062861DD58000A621C /* View */,
 				AC97F2DB2861DD33000A621C /* SampleLoginValidationApp.swift */,
 				AC97F2DD2861DD33000A621C /* ContentView.swift */,
 				AC97F2DF2861DD35000A621C /* Assets.xcassets */,
@@ -125,6 +128,14 @@
 				AC97F2F82861DD35000A621C /* SampleLoginValidationUITestsLaunchTests.swift */,
 			);
 			path = SampleLoginValidationUITests;
+			sourceTree = "<group>";
+		};
+		AC97F3062861DD58000A621C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC97F3072861DD6E000A621C /* LoginScreen.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +270,7 @@
 			files = (
 				AC97F2DE2861DD33000A621C /* ContentView.swift in Sources */,
 				AC97F2DC2861DD33000A621C /* SampleLoginValidationApp.swift in Sources */,
+				AC97F3082861DD6E000A621C /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
