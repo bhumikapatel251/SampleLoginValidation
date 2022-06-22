@@ -10,19 +10,24 @@ import SwiftUI
 struct LoginScreen: View {
     @State private var email = ""
     @State private var password = ""
-    
+    @ObservedObject var emailObj = EmailValidationnobj()
+    @ObservedObject var passObj = PasswordValidationobj()
     var body: some View {
-        VStack(spacing: 20){
+        VStack(alignment: .leading,spacing: 20){
             Text("Log In").font(.largeTitle)
-            Field(value: $email, placeholder: "email", icon: "envelope.fill")
+            Field(value: $emailObj.email, placeholder: "email", icon: "envelope.fill")
                 .keyboardType(.emailAddress)
-            Field(value: $password, placeholder: "password", isSecure: true, icon: "lock.fill")
-            
-                
+                .autocapitalization(.none)
+            Text(emailObj.error).foregroundColor(.red).font(.system(size: 12))
+               
+            Field(value: $passObj.pass, placeholder: "password", isSecure: true, icon: "lock.fill")
+                .autocapitalization(.none)
+            Text(passObj.error).foregroundColor(.red).font(.system(size: 12))
+            HStack{
                 Button{
                     
                     } label: {
-                        Text("ForgotPassword")
+                        Text("ForgotPassword?")
                             .foregroundColor(Color.blue)
                             .fontWeight(.semibold)
                                                     
@@ -46,7 +51,7 @@ struct LoginScreen: View {
             .frame(width: 150, height: 50)
             .background(Color.blue)
             .cornerRadius(10)
-            
+            }
             Rectangle()
                 .fill(Color.gray)
                 .opacity(1.5)
@@ -69,7 +74,7 @@ struct LoginScreen: View {
 
             }
         }
-        
+        .padding()
     }
 }
 
@@ -90,7 +95,7 @@ struct Field: View {
             if isSecure {
                 SecureField(placeholder, text: $value).autocapitalization(.none)
             }else{
-                TextField(placeholder,text: $value).font(Font.system(size: 20, design: .monospaced))
+                TextField(placeholder,text: $value).font(Font.system(size: 18, design: .monospaced))
             }
                 
         }
