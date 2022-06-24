@@ -38,8 +38,8 @@ struct Login1: View{
     @State private var showingLoginScreen = false
     @State private var wrongUsername: Float = 0
     @State private var wrongPassword: Float  = 0
-    @ObservedObject var emailObj = EmailValidationnobj()
-    @ObservedObject var passObj = PasswordValidationobj()
+   // @ObservedObject var emailObj = EmailValidationnobj()
+   // @ObservedObject var passObj = PasswordValidationobj()
   //  @StateObject var vm = Oauth()
     var body: some View{
         NavigationView{
@@ -53,21 +53,21 @@ struct Login1: View{
                             .multilineTextAlignment(.center)
                             Text("Log in your Account")
                                 .font(.callout)
-                            TextField("Email", text: self.$emailObj.email)
+                            TextField("Email", text: self.$email)
                                 .keyboardType(.emailAddress)
                                 .autocapitalization(.none)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color.blue : self.color,lineWidth: 2))
                                 .padding(.top, 25)
-                            Text(emailObj.error).foregroundColor(.red).font(.system(size: 12))
+                           // Text(emailObj.error).foregroundColor(.red).font(.system(size: 12))
                             
                             HStack{
                                 VStack{
                                     if self.visible{
-                                        TextField("Password", text: self.$passObj.pass)
+                                        TextField("Password", text: self.$pass)
                                             .autocapitalization(.none)
                                     } else{
-                                        SecureField("Password", text: self.$passObj.pass)
+                                        SecureField("Password", text: self.$pass)
                                             .autocapitalization(.none)
                                     
                                     }
@@ -82,7 +82,7 @@ struct Login1: View{
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ? Color.blue : self.color,lineWidth: 2))
                             .padding(.top, 25)
-                            Text(passObj.error).foregroundColor(.red).font(.system(size: 12))
+                           // Text(passObj.error).foregroundColor(.red).font(.system(size: 12))
                             HStack{
                                 Button{
                                 
@@ -145,6 +145,12 @@ struct Login1: View{
             
         }else{
             self.error = "Please enter email and password"
+            self.alert.toggle()
+        }
+        if self.email != email && self.pass != pass{
+            
+        }else{
+            self.error = "Please enter email and password properly"
             self.alert.toggle()
         }
     }
