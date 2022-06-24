@@ -139,16 +139,28 @@ struct Login1: View{
         }
     }
     func verify() {
-        if self.email != "" && self.pass != ""{
-            
-           authenticateUser(username: email, password: pass)
-            
+        if self.email != "" {
+            if self.pass != ""{
+                authenticateUser(username: email, password: pass)
+            }else{
+                self.error = "Please enter  password"
+                self.alert.toggle()
+            }
         }else{
             self.error = "Please enter email and password"
             self.alert.toggle()
         }
+       
+//        if self.email != "" && self.pass != ""{
+//
+//           authenticateUser(username: email, password: pass)
+//
+//        }else{
+//            self.error = "Please enter email and password"
+//            self.alert.toggle()
+//        }
         if self.email != email && self.pass != pass{
-            
+
         }else{
             self.error = "Please enter email and password properly"
             self.alert.toggle()
