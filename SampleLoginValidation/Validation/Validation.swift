@@ -6,6 +6,51 @@
 //
 
 import Foundation
+import SwiftUI
+
+extension ContentView{
+    class Oauth: ObservableObject{
+        @AppStorage("Auth_Key") var authenticated = false {
+            willSet{ objectWillChange.send() }
+        }
+        @AppStorage("User_Key") var email = ""
+        
+        @Published var password = ""
+        @Published var invalid: Bool = false
+        
+        private var sampleEmail = "bhumi@gmail.com1"
+        private var samplePassword = "1221"
+        
+        init() {
+            print("Currently Logged On: \(authenticated)")
+            print("Current email: \(email)")
+        }
+        func toggleAuthentication(){
+            self.password = ""
+            
+            withAnimation{
+                authenticated.toggle()
+            }
+        }
+        func authenticate() {
+            guard self.email.lowercased() == sampleEmail else {
+                self.invalid = true
+                return
+            }
+            guard self.password.lowercased() == samplePassword else {
+                self.invalid = true
+                return
+            }
+            toggleAuthentication()
+        }
+        func logOut(){
+            toggleAuthentication()
+        }
+        func logPressed(){
+            print("Button Pressed.")
+        }
+    }
+}
 class EmailValidationnobj: ObservableObject{
     @Published var email = ""{
         didSet {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC8BD65D28645F67005DEB6E /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8BD65C28645F67005DEB6E /* UserAuth.swift */; };
+		AC8BD65F28646949005DEB6E /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8BD65E28646949005DEB6E /* LoginPage.swift */; };
 		AC97F2DC2861DD33000A621C /* SampleLoginValidationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2DB2861DD33000A621C /* SampleLoginValidationApp.swift */; };
 		AC97F2DE2861DD33000A621C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2DD2861DD33000A621C /* ContentView.swift */; };
 		AC97F2E02861DD35000A621C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC97F2DF2861DD35000A621C /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC8BD65C28645F67005DEB6E /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
+		AC8BD65E28646949005DEB6E /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		AC97F2D82861DD33000A621C /* SampleLoginValidation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleLoginValidation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC97F2DB2861DD33000A621C /* SampleLoginValidationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleLoginValidationApp.swift; sourceTree = "<group>"; };
 		AC97F2DD2861DD33000A621C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				AC97F3072861DD6E000A621C /* LoginScreen.swift */,
+				AC8BD65E28646949005DEB6E /* LoginPage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				AC9E6DD92862E49A000F2416 /* Validation.swift */,
+				AC8BD65C28645F67005DEB6E /* UserAuth.swift */,
 			);
 			path = Validation;
 			sourceTree = "<group>";
@@ -279,9 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC8BD65D28645F67005DEB6E /* UserAuth.swift in Sources */,
 				AC97F2DE2861DD33000A621C /* ContentView.swift in Sources */,
 				AC97F2DC2861DD33000A621C /* SampleLoginValidationApp.swift in Sources */,
 				AC9E6DDA2862E49A000F2416 /* Validation.swift in Sources */,
+				AC8BD65F28646949005DEB6E /* LoginPage.swift in Sources */,
 				AC97F3082861DD6E000A621C /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
