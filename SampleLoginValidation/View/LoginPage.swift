@@ -29,8 +29,10 @@ struct Home1: View {
     }
 }
 struct Login1: View{
-    @State var email = ""
-    @State var pass = ""
+    @State var email = "bhumi@test.com"
+    @State var pass = "Abc@123"
+    var defaultEmail = "bhumi@test.com"
+    var defaultPass = "Abc@123"
     @State var visible = false
     @State var color = Color.black.opacity(0.7)
     @State var alert = false
@@ -38,8 +40,8 @@ struct Login1: View{
     @State private var showingLoginScreen = false
     @State private var wrongUsername: Float = 0
     @State private var wrongPassword: Float  = 0
-   // @ObservedObject var emailObj = EmailValidationnobj()
-   // @ObservedObject var passObj = PasswordValidationobj()
+    @ObservedObject var emailObj = EmailValidationnobj()
+    @ObservedObject var passObj = PasswordValidationobj()
   //  @StateObject var vm = Oauth()
     var body: some View{
         NavigationView{
@@ -53,21 +55,27 @@ struct Login1: View{
                             .multilineTextAlignment(.center)
                             Text("Log in your Account")
                                 .font(.callout)
-                            TextField("Email", text: self.$email)
+                            
+                            Text("Email")
+                                .padding(.top)
+                            TextField("Email", text: self.$emailObj.email)
                                 .keyboardType(.emailAddress)
                                 .autocapitalization(.none)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 4).stroke(self.email != "" ? Color.blue : self.color,lineWidth: 2))
-                                .padding(.top, 25)
-                           // Text(emailObj.error).foregroundColor(.red).font(.system(size: 12))
-                            
+                                .padding(.top, 1)
+                            Text(emailObj.error).foregroundColor(.red).font(.system(size: 13))
+                            Text("Password")
+                                .padding(.top)
                             HStack{
+                                
                                 VStack{
+                                    
                                     if self.visible{
-                                        TextField("Password", text: self.$pass)
+                                        TextField("Password", text: self.$passObj.pass)
                                             .autocapitalization(.none)
                                     } else{
-                                        SecureField("Password", text: self.$pass)
+                                        SecureField("Password", text: self.$passObj.pass)
                                             .autocapitalization(.none)
                                     
                                     }
@@ -80,9 +88,10 @@ struct Login1: View{
                                 }
                             }
                             .padding()
+                            
                             .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ? Color.blue : self.color,lineWidth: 2))
-                            .padding(.top, 25)
-                           // Text(passObj.error).foregroundColor(.red).font(.system(size: 12))
+                            .padding(.top, 1)
+                            Text(passObj.error).foregroundColor(.red).font(.system(size: 13))
                             HStack{
                                 Button{
                                 
@@ -139,47 +148,41 @@ struct Login1: View{
         }
     }
     func verify() {
-        if self.email != "" {
-            if self.pass != ""{
-                authenticateUser(username: email, password: pass)
-            }else{
-                self.error = "Please enter  password"
-                self.alert.toggle()
-            }
+        if self.$emailObj.email.wrappedValue != "" && self.$passObj.pass.wrappedValue != "" {
+            
+//            if self.email == defaultEmail && self.pass == defaultPass{
+//                showingLoginScreen = true
+            authenticateUser(username: $emailObj.email.wrappedValue, password: $passObj.pass.wrappedValue)
+//            }else{
+//                self.error = "wrong email and pass"
+//                self.alert.toggle()
+//
+//            }
         }else{
-            self.error = "Please enter email and password"
+            self.error = "Email and Password can't be empty"
             self.alert.toggle()
         }
-       
-//        if self.email != "" && self.pass != ""{
-//
-//           authenticateUser(username: email, password: pass)
-//
-//        }else{
-//            self.error = "Please enter email and password"
-//            self.alert.toggle()
-//        }
-        if self.email != email && self.pass != pass{
-
-        }else{
-            self.error = "Please enter email and password properly"
-            self.alert.toggle()
-        }
+        
     }
     func authenticateUser(username: String, password: String) {
        // print("auth user")
        // print(username, password)
         
-        if username.lowercased() == "bhumi@test.com" {
+        if username.lowercased() == defaultEmail {
             wrongUsername = 0
-            if password == "Abc@123" {
+            if password == defaultPass {
                 wrongPassword = 0
                 showingLoginScreen = true
             } else {
+                
                 wrongPassword = 2
+                self.error = "Please enter currect Password"
+                self.alert.toggle()
             }
         } else {
             wrongUsername = 2
+            self.error = "Please enter currect Email"
+            self.alert.toggle()
         }
     }
 }

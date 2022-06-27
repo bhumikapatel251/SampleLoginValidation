@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @State private var email = ""
-    @State private var password = ""
+    @State private var email = "bhumi@test.com"
+    @State private var password = "Abc@123"
+    var defaultEmail = "bhumi@test.com"
+    var defaultPass = "Abc@123"
     @ObservedObject var emailObj = EmailValidationnobj()
     @ObservedObject var passObj = PasswordValidationobj()
     @State private var wrongUsername: Float = 0
@@ -53,13 +55,16 @@ struct LoginScreen: View {
                     
                             Button("Login") {
                                 // check email and password empty
-        //                        if self.email != "" && self.password != ""{
+                                if self.$emailObj.email.wrappedValue != "" && self.$passObj.pass.wrappedValue != ""{
                                     authenticateUser(username: $emailObj.email.wrappedValue, password: $passObj.pass.wrappedValue)
-        //                        } else {
-        //                            self.error = "Please enter email and password"
-        //                            self.alert.toggle()
-        //                        }
-                                self.verify()
+                                } else {
+                                   
+                                  
+                                    self.error = "Please enter email and password"
+                                    self.alert.toggle()
+                               }
+                              //  self.verify()
+                                
                                 }
                             .foregroundColor(.white)
                             .frame(width: 150, height: 40)
@@ -96,36 +101,39 @@ struct LoginScreen: View {
                         
                         .padding()
                 }
+                if self.alert{
+                    ErrorView1(alert: self.$alert, error: self.$error)
+                }
             }
-            if self.alert{
-                ErrorView1(alert: self.$alert, error: self.$error)
-            }
+            
         }
     }
+//    func verify() {
+//        
+//    }
     func authenticateUser(username: String, password: String) {
-        print("auth user")
-        print(username, password)
+       // print("auth user")
+       // print(username, password)
         
-        if username.lowercased() == "bhumi@test.com" {
+        if username.lowercased() == defaultEmail {
             wrongUsername = 0
-            if password == "Abc@123" {
+            if password == defaultPass {
                 wrongPassword = 0
                 showingLoginScreen = true
             } else {
+                
                 wrongPassword = 2
+                self.error = "Please enter currect Password"
+                self.alert.toggle()
             }
         } else {
             wrongUsername = 2
-        }
-    }
-    func verify() {
-        if self.email != "" && self.password != ""{
-           
-        }else{
-            self.error = "Please enter email and password"
+            self.error = "Please enter currect Email"
             self.alert.toggle()
         }
     }
+    
+    
 }
 
 struct LoginScreen_Previews: PreviewProvider {
@@ -173,7 +181,7 @@ struct ErrorView1 : View{
                 .padding(.horizontal, 25)
                 
                 Text(self.error)
-                    .foregroundColor(Color.red)
+                    .foregroundColor(Color.black)
                     .padding(.top)
                     .padding(.horizontal,25)
                 Button(action: {

@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC3B0E5A2869B79200F817DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2DD2861DD33000A621C /* ContentView.swift */; };
 		AC8BD65D28645F67005DEB6E /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8BD65C28645F67005DEB6E /* UserAuth.swift */; };
 		AC8BD65F28646949005DEB6E /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8BD65E28646949005DEB6E /* LoginPage.swift */; };
 		AC97F2DC2861DD33000A621C /* SampleLoginValidationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2DB2861DD33000A621C /* SampleLoginValidationApp.swift */; };
-		AC97F2DE2861DD33000A621C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2DD2861DD33000A621C /* ContentView.swift */; };
 		AC97F2E02861DD35000A621C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC97F2DF2861DD35000A621C /* Assets.xcassets */; };
 		AC97F2E32861DD35000A621C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC97F2E22861DD35000A621C /* Preview Assets.xcassets */; };
 		AC97F2ED2861DD35000A621C /* SampleLoginValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC97F2EC2861DD35000A621C /* SampleLoginValidationTests.swift */; };
@@ -286,8 +286,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC8BD65D28645F67005DEB6E /* UserAuth.swift in Sources */,
-				AC97F2DE2861DD33000A621C /* ContentView.swift in Sources */,
 				AC97F2DC2861DD33000A621C /* SampleLoginValidationApp.swift in Sources */,
+				AC3B0E5A2869B79200F817DB /* ContentView.swift in Sources */,
 				AC9E6DDA2862E49A000F2416 /* Validation.swift in Sources */,
 				AC8BD65F28646949005DEB6E /* LoginPage.swift in Sources */,
 				AC97F3082861DD6E000A621C /* LoginScreen.swift in Sources */,
