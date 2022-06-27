@@ -56,6 +56,8 @@ struct Login1: View{
                             Text("Log in your Account")
                                 .font(.callout)
                             
+                            Text(self.error).foregroundColor(.red).font(.system(size: 16))
+                                .padding(.top,1)
                             Text("Email")
                                 .padding(.top)
                             TextField("Email", text: self.$emailObj.email)
@@ -168,21 +170,13 @@ struct Login1: View{
        // print("auth user")
        // print(username, password)
         
-        if username.lowercased() == defaultEmail {
+        if username.lowercased() == defaultEmail && password == defaultPass {
             wrongUsername = 0
-            if password == defaultPass {
-                wrongPassword = 0
                 showingLoginScreen = true
-            } else {
-                
-                wrongPassword = 2
-                self.error = "Please enter currect Password"
-                self.alert.toggle()
-            }
-        } else {
-            wrongUsername = 2
-            self.error = "Please enter currect Email"
-            self.alert.toggle()
+        }else {
+            wrongPassword = 2
+            self.error = "Please enter currect Email and Password"
+           // self.alert.toggle()
         }
     }
 }
