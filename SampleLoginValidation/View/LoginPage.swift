@@ -29,10 +29,10 @@ struct Home1: View {
     }
 }
 struct Login1: View{
-    @State var email = "bhumi@test.com"
-    @State var pass = "Abc@123"
-    var defaultEmail = "bhumi@test.com"
-    var defaultPass = "Abc@123"
+    @State var email = ""
+    @State var pass = ""
+    var defaultEmail = ""
+    var defaultPass = ""
     @State var visible = false
     @State var color = Color.black.opacity(0.7)
     @State var alert = false
@@ -40,8 +40,9 @@ struct Login1: View{
     @State private var showingLoginScreen = false
     @State private var wrongUsername: Float = 0
     @State private var wrongPassword: Float  = 0
+    @StateObject var loginApi = LoginApi()
     @ObservedObject var emailObj = EmailValidationnobj()
-    @ObservedObject var passObj = PasswordValidationobj()
+  //  @ObservedObject var passObj = PasswordValidationobj()
   //  @StateObject var vm = Oauth()
     var body: some View{
         NavigationView{
@@ -74,10 +75,10 @@ struct Login1: View{
                                 VStack{
                                     
                                     if self.visible{
-                                        TextField("Password", text: self.$passObj.pass)
+                                        TextField("Password", text: self.$pass)
                                             .autocapitalization(.none)
                                     } else{
-                                        SecureField("Password", text: self.$passObj.pass)
+                                        SecureField("Password", text: self.$pass)
                                             .autocapitalization(.none)
                                     
                                     }
@@ -93,7 +94,7 @@ struct Login1: View{
                             
                             .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ? Color.blue : self.color,lineWidth: 2))
                             .padding(.top, 1)
-                            Text(passObj.error).foregroundColor(.red).font(.system(size: 13))
+                            //Text(passObj.error).foregroundColor(.red).font(.system(size: 13))
                             HStack{
                                 Button{
                                 
@@ -125,7 +126,7 @@ struct Login1: View{
                                 .frame(width: 150, height: 40)
                                 .background(Color.blue)
                                 .cornerRadius(10)
-                                NavigationLink(destination: Text("You are logged in @\(email)"), isActive: $showingLoginScreen) {
+                                    NavigationLink(destination: Text("You are logged in @\($emailObj.email.wrappedValue)"), isActive: $loginApi.isLoginSuccessful) {
                                         EmptyView()
                                     }
                                 }
@@ -150,11 +151,11 @@ struct Login1: View{
         }
     }
     func verify() {
-        if self.$emailObj.email.wrappedValue != "" && self.$passObj.pass.wrappedValue != "" {
+        if self.$emailObj.email.wrappedValue != "" && self.pass != "" {
             
 //            if self.email == defaultEmail && self.pass == defaultPass{
 //                showingLoginScreen = true
-            authenticateUser(username: $emailObj.email.wrappedValue, password: $passObj.pass.wrappedValue)
+            loginApi.fetchUser(username: $emailObj.email.wrappedValue, password: pass)
 //            }else{
 //                self.error = "wrong email and pass"
 //                self.alert.toggle()
@@ -166,19 +167,19 @@ struct Login1: View{
         }
         
     }
-    func authenticateUser(username: String, password: String) {
-       // print("auth user")
-       // print(username, password)
-        
-        if username.lowercased() == defaultEmail && password == defaultPass {
-            wrongUsername = 0
-                showingLoginScreen = true
-        }else {
-            wrongPassword = 2
-            self.error = "Please enter currect Email and Password"
-           // self.alert.toggle()
-        }
-    }
+//    func authenticateUser(username: String, password: String) {
+//       // print("auth user")
+//       // print(username, password)
+//        
+//        if username.lowercased() == defaultEmail && password == defaultPass {
+//            wrongUsername = 0
+//                showingLoginScreen = true
+//        }else {
+//            wrongPassword = 2
+//            self.error = "Please enter currect Email and Password"
+//           // self.alert.toggle()
+//        }
+//    }
 }
 
 struct ErrorView : View{
