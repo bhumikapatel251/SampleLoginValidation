@@ -162,7 +162,7 @@ struct Login1: View{
 //            }
         }else{
             self.error = "Email and Password can't be empty"
-            self.alert.toggle()
+            //self.alert.toggle()
         }
         
     }
