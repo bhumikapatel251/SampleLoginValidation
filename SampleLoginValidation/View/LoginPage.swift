@@ -6,16 +6,28 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
+
 
 struct LoginPage: View {
+    @EnvironmentObject var loginApi: LoginApi
     var body: some View {
         Login1()
+       
+//        NavigationView{
+//            if loginApi.isLoginSuccessful{
+//                HomeView()
+//            }else{
+//                Login1()
+//            }
+//        }
     }
 }
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
         LoginPage()
+        
     }
 }
 struct Home1: View {
@@ -42,9 +54,10 @@ struct Login1: View{
     @State private var wrongPassword: Float  = 0
     @StateObject var loginApi = LoginApi()
     @ObservedObject var emailObj = EmailValidationnobj()
-  //  @ObservedObject var passObj = PasswordValidationobj()
+    @ObservedObject var passObj = PasswordValidationobj()
   //  @StateObject var vm = Oauth()
     var body: some View{
+        
         NavigationView{
             ZStack{
                 ZStack(alignment: .topTrailing){
@@ -75,10 +88,10 @@ struct Login1: View{
                                 VStack{
                                     
                                     if self.visible{
-                                        TextField("Password", text: self.$pass)
+                                        TextField("Password", text: self.$passObj.pass)
                                             .autocapitalization(.none)
                                     } else{
-                                        SecureField("Password", text: self.$pass)
+                                        SecureField("Password", text: self.$passObj.pass)
                                             .autocapitalization(.none)
                                     
                                     }
@@ -94,7 +107,7 @@ struct Login1: View{
                             
                             .background(RoundedRectangle(cornerRadius: 4).stroke(self.pass != "" ? Color.blue : self.color,lineWidth: 2))
                             .padding(.top, 1)
-                            //Text(passObj.error).foregroundColor(.red).font(.system(size: 13))
+                            Text(passObj.error).foregroundColor(.red).font(.system(size: 13))
                             HStack{
                                 Button{
                                 
@@ -126,9 +139,13 @@ struct Login1: View{
                                 .frame(width: 150, height: 40)
                                 .background(Color.blue)
                                 .cornerRadius(10)
-                                    NavigationLink(destination: Text("You are logged in @\($emailObj.email.wrappedValue)"), isActive: $loginApi.isLoginSuccessful) {
-                                        EmptyView()
-                                    }
+//                                    let accessToken: String? = KeychainWrapper.standard.string(forKey: "accessToken")
+//                                    if accessToken != nil{
+//                                        NavigationLink(destination: Text("You are logged in @\($emailObj.email.wrappedValue)"), isActive: $loginApi.isLoginSuccessful) {
+//                                            EmptyView()
+//                                        }
+//                                    }
+                                   
                                 }
                             }.padding(.vertical,25)
                         }.padding(.horizontal, 15)
@@ -142,20 +159,29 @@ struct Login1: View{
                     }
                     .padding()
                 }
-                
+                if loginApi.isLoginSuccessful{
+                    HomeView()
+                }
                 if self.alert{
                     ErrorView(alert: self.$alert, error: self.$error)
                 }
             }
             .navigationBarHidden(true)
         }
+        
     }
+    
     func verify() {
-        if self.$emailObj.email.wrappedValue != "" && self.pass != "" {
+        if self.$emailObj.email.wrappedValue != "" && self.$passObj.pass.wrappedValue != "" {
             
 //            if self.email == defaultEmail && self.pass == defaultPass{
 //                showingLoginScreen = true
-            loginApi.fetchUser(username: $emailObj.email.wrappedValue, password: pass)
+           
+            loginApi.fetchUser(username: $emailObj.email.wrappedValue, password: $passObj.pass.wrappedValue)
+           
+            
+                    
+            
 //            }else{
 //                self.error = "wrong email and pass"
 //                self.alert.toggle()
@@ -167,6 +193,7 @@ struct Login1: View{
         }
         
     }
+   
 //    func authenticateUser(username: String, password: String) {
 //       // print("auth user")
 //       // print(username, password)

@@ -8,49 +8,6 @@
 import Foundation
 import SwiftUI
 
-extension ContentView{
-    class Oauth: ObservableObject{
-        @AppStorage("Auth_Key") var authenticated = false {
-            willSet{ objectWillChange.send() }
-        }
-        @AppStorage("User_Key") var email = ""
-        
-        @Published var password = ""
-        @Published var invalid: Bool = false
-        
-        private var sampleEmail = "bhumi@gmail.com1"
-        private var samplePassword = "1221"
-        
-        init() {
-            print("Currently Logged On: \(authenticated)")
-            print("Current email: \(email)")
-        }
-        func toggleAuthentication(){
-            self.password = ""
-            
-            withAnimation{
-                authenticated.toggle()
-            }
-        }
-        func authenticate() {
-            guard self.email.lowercased() == sampleEmail else {
-                self.invalid = true
-                return
-            }
-            guard self.password.lowercased() == samplePassword else {
-                self.invalid = true
-                return
-            }
-            toggleAuthentication()
-        }
-        func logOut(){
-            toggleAuthentication()
-        }
-        func logPressed(){
-            print("Button Pressed.")
-        }
-    }
-}
 class EmailValidationnobj: ObservableObject{
     @Published var email = ""{
         didSet {
@@ -74,36 +31,38 @@ class PasswordValidationobj: ObservableObject{
     }
     @Published var error = ""
     private func isValidPassword(){
-        guard !self.pass.isEmpty else {
+        if self.pass.isEmpty  {
             self.error = "Required"
-            return
+            //return
+        }else{
+            self.error = ""
         }
-        let setPassError = self.pass.isPassword() == false
+        //let setPassError = self.pass.isPassword() == false
         
-        if setPassError{
-            if self.pass.count < 6 {
-                self.error = "Must be at least 6 characters."
-                return
-            }
-            if !self.pass.isUpperCase(){
-                self.error = "Must be at least 1 Uppercase characters."
-                return
-            }
-            if !self.pass.isLowerCase(){
-                self.error = "Must be at least 1 Lowercase characters."
-                return
-            }
-            if !self.pass.containsCharacter(){
-                self.error = "Must be at least 1 Special characters."
-                return
-            }
-            if !self.pass.containsDigit(){
-                self.error = "Must be at least 1 Digit."
-                return
-            }else {
-                self.error = ""
-            }
-        }
+//        if setPassError{
+//            if self.pass.count < 6 {
+//                self.error = "Must be at least 6 characters."
+//                return
+//            }
+//            if !self.pass.isUpperCase(){
+//                self.error = "Must be at least 1 Uppercase characters."
+//                return
+//            }
+//            if !self.pass.isLowerCase(){
+//                self.error = "Must be at least 1 Lowercase characters."
+//                return
+//            }
+//            if !self.pass.containsCharacter(){
+//                self.error = "Must be at least 1 Special characters."
+//                return
+//            }
+//            if !self.pass.containsDigit(){
+//                self.error = "Must be at least 1 Digit."
+//                return
+//            }else {
+//                self.error = ""
+//            }
+//        }
     }
     
 }

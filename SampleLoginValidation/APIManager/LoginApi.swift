@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftKeychainWrapper
 
 struct Logintest: Encodable {
     let email: String
@@ -16,6 +17,7 @@ class LoginApi: ObservableObject{
     @Published var result: ResultData? = nil
     @Published var isLoginSuccessful = false
     @Published var isCorrect = false
+    @Published var displayMessage = false
 
     func fetchUser(username : String, password : String) {
         
@@ -31,13 +33,30 @@ class LoginApi: ObservableObject{
                         do{
                             let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
                             if responsetest.response?.statusCode == 200 {
-                            if let parseJSON = json{
+                            
                                 let test = responsetest
-                            }
                                 self.isLoginSuccessful = true
                                 print("success")
                             }else{
                                 print("try again")
+                            }
+                            if let parseJSON = json{
+                               // let test = responsetest
+                                let accessToken = parseJSON["access_token"] as? String
+                                //let userId = parseJSON["id"] as? String
+                               // print("accessToken:\(accessToken)")
+                                let saveAccessToken: Bool = KeychainWrapper.standard.set(accessToken!, forKey: "accessToken")
+                                //let saveUserId: Bool = KeychainWrapper.standard.set(userId!, forKey: "userId")
+                                print("The access token save result: \(saveAccessToken)")
+                                //print("The UserId save result: \(saveUserId)")
+                                if(accessToken?.isEmpty)!{
+                                    self.displayMessage = true
+                                   print("try again")
+                                    
+                                } else{
+                                    //self.isLoginSuccessful = true
+                                    print("success")
+                                }
                             }
                         }catch{
                             print(error.localizedDescription)
@@ -48,4 +67,5 @@ class LoginApi: ObservableObject{
 
         }
     }
+   
 }
