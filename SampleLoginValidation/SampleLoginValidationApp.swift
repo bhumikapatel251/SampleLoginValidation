@@ -10,7 +10,7 @@ import SwiftKeychainWrapper
 @main
 struct SampleLoginValidationApp: App {
     @StateObject var loginApi = LoginApi()
-    @StateObject private var session = SessionManager()
+    
     @ObservedObject var emailObj = EmailValidationnobj()
     var body: some Scene {
     
@@ -20,8 +20,8 @@ struct SampleLoginValidationApp: App {
                  let accessToken: String? = KeychainWrapper.standard.string(forKey: "accessToken")
 
                     if accessToken != nil{
-                        HomeView().environmentObject(session)
-
+                        HomeView()
+                       
                     }else{
                       
                         LoginPage()

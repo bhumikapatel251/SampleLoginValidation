@@ -9,41 +9,54 @@ import SwiftUI
 import SwiftKeychainWrapper
 
 struct HomeView: View {
-    //@State var show = false
-    @StateObject private var session = SessionManager()
+    @State private var show = false
+    
     @StateObject var loginApi = LoginApi()
+    
+    @State var logOut = false
    // @EnvironmentObject var loginApi : LoginApi
     var body: some View {
-        NavigationView{
-            ZStack{
+//        if loginApi.isLoginSuccessful{
+//            LoginPage()
+//        }
+        ZStack{
+         
+            VStack{
                 VStack{
                     Button{
-                      // KeychainWrapper.standard.removeObject(forKey: "accessToken")
+                   
+                  //  KeychainWrapper.standard.removeObject(forKey: "accessToken")
+                      //  loginApi.isLoginSuccessful = false
                        
-                        withAnimation{
-                            session.LogOut()
-                        }
+                        
                         
                   } label: {
-                      Text("LogOut")
+                        Text("LogOut")
                   }
+                    let accessToken: String? = KeychainWrapper.standard.string(forKey: "accessToken")
+                    Text(accessToken! )
                 }
+            
+        }
+                    
+        }
 //                if loginApi.isLoginSuccessful{
 //                    LoginPage()
 //                }
-                
-            }
-        }
+    
+       
     }
 //    func clear(){
-//         KeychainWrapper.standard.removeObject(forKey: "accessToken")
 //
+//        if loginApi.isLoginSuccessful{
+//            LoginPage()
+//        }
 //
 //    }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView().environmentObject(SessionManager())
+        HomeView()
     }
 }

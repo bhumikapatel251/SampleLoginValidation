@@ -66,6 +66,49 @@ class PasswordValidationobj: ObservableObject{
     }
     
 }
+class ConPasswordValidationobj: ObservableObject{
+    @Published var conPass = "" {
+        didSet {
+            self.isValidPassword()
+        }
+    }
+    @Published var error = ""
+    private func isValidPassword(){
+        if self.conPass.isEmpty  {
+            self.error = "Required"
+            //return
+        }else{
+            self.error = ""
+        }
+        //let setPassError = self.pass.isPassword() == false
+        
+//        if setPassError{
+//            if self.pass.count < 6 {
+//                self.error = "Must be at least 6 characters."
+//                return
+//            }
+//            if !self.pass.isUpperCase(){
+//                self.error = "Must be at least 1 Uppercase characters."
+//                return
+//            }
+//            if !self.pass.isLowerCase(){
+//                self.error = "Must be at least 1 Lowercase characters."
+//                return
+//            }
+//            if !self.pass.containsCharacter(){
+//                self.error = "Must be at least 1 Special characters."
+//                return
+//            }
+//            if !self.pass.containsDigit(){
+//                self.error = "Must be at least 1 Digit."
+//                return
+//            }else {
+//                self.error = ""
+//            }
+//        }
+    }
+    
+}
 extension String {
     func isValidEmail()-> Bool {
         let emailRegEx = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" +

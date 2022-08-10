@@ -16,9 +16,10 @@ struct Logintest: Encodable {
 class LoginApi: ObservableObject{
     @Published var result: ResultData? = nil
     @Published var isLoginSuccessful = false
+    @Published var logOut = false
     @Published var isCorrect = false
     @Published var displayMessage = false
-
+  
     func fetchUser(username : String, password : String) {
         
         let headers: HTTPHeaders = [
